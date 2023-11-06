@@ -1,0 +1,22 @@
+Fase 0
+
+Crear servidor web (máquina virtual)
+mariadb
+mongodb
+plantilla
+  autenticación de usuarios (mariadb)
+  creación de usuarios
+  subida de ficheros y carpetas (mongodb)
+  ficheros compartidos por usuarios y departamentos
+  registro de ficheros subidos por el usuario y eliminados por fichero malicioso (mariadb)
+  Descarga de ficheros 
+  panel administrativo de validación de usuario y asignación a departamentos
+  registro de acción de usuarios (eliminar o subir)(mariadb)
+  cifrado de ficheros punto por punto
+  seguridad de la red
+Crear web
+  autenticación
+  creación de usuarios
+  subida de ficheros
+  verificación con virus total
+  mostrar resultados
