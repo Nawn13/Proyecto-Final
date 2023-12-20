@@ -3,6 +3,8 @@ En el branch de fase 0 tienes un rar con el resultado final de esta fase el rest
 
 Debes instalar el servidor web XAMPP y crear dentro de el una carpeta llamada pagina y dentro de ella las carpetas pertinentes que ya tendras creadas en el rar.
 
+Tambien debes instalar mongo y mongosh la conexion es la siguiente: mongodb://localhost:27017. Tambien te aparece al abrir Mongodb.
+
 Todo sobre la base de datos estara en el github en la branch de fase 0 con el nombre estrcutruraMariadb.
 Para la base de datos relacional en mariadb tendras las estructuras en una imagen llamada Estructura mariadb tienes un ejemplo de creacion de tabla con sus foraneas en una imagen llamada Ejemplo tabla.
 Esta imagen es el como debes crear la tabla ficheros aparte lo unico que tendrias que hacer guiandote en la otra imagen con los describe que la Id_Depart de la tabla usuarios indique como clave foranea al Id_Depart de la tabla departamentos.
@@ -15,3 +17,5 @@ Para el funcionamiento de los algunos de los codigos necesitaras realizar los si
 pip install requests
 pip install mysql-connector-python
 pip install pymongo
+
+
