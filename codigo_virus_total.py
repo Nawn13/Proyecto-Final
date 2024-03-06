@@ -3,20 +3,16 @@ import requests
 import mysql.connector
 from mysql.connector import Error
 import sys
+import hashlib
 
 # Obtener la ruta del directorio base del segundo argumento (avg[1])
 if len(sys.argv) > 1:
-    base_directory = "./usuarios/Informatica/"
+    base_directory = sys.argv[1]
 else:
     base_directory = r"C:\xampp\htdocs\pagina\usuarios\Informatica"  # Ruta por defecto si no se proporciona
 
 # Nombre del archivo en el que deseas guardar el contenido
 nombre_archivo = "archivo.txt"
-
-# Abrir el archivo en modo escritura
-with open(nombre_archivo, 'w') as archivo:
-    # Escribir el contenido de la variable en el archivo
-    archivo.write(base_directory)
 
 # URL para enviar el archivo a VirusTotal
 url_submit = "https://www.virustotal.com/api/v3/files"
@@ -69,6 +65,9 @@ try:
                     file_path = os.path.join(root, filename)
                     print(f"Procesando archivo: {file_path}")
 
+                    # Calcular el hash del archivo
+                    hash_value = calcular_hash(file_path)
+
                     # Enviar el archivo a VirusTotal
                     with open(file_path, "rb") as file:
                         files = {"file": (filename, file, "application/x-msdownload")}
@@ -102,30 +101,47 @@ try:
                                 malicioso = analysis_results == 'malicious'
 
                                 # Asignar valor a Malicioso_no
-                                malicioso_no = True if malicioso else False
+                                #malicioso_no = True if malicioso else False
+                                if malicioso:
+                                    malicioso_no = 1
+                                else:
+                                    malicioso_no = 0
 
-                                # Simular valores para Id_user, Id_Depart y Hash
-                                id_user = 1
-                                id_depart = 1
-                                hash_value = "1234567890"  # Simulación de un valor de hash
+                                # Obtener la cantidad de antivirus que han intervenido en el análisis
+                                cantidad_antivirus = attributes["stats"]["malicious"] + attributes["stats"]["suspicious"] #+ attributes["stats"]["type-unsupported"]
+
+                                # Simular valores para Id_user, Id_Depart
+                                id_user = sys.argv[2]
+                                id_depart = sys.argv[3]
 
                                 # Almacenar la información en la base de datos
-                                cursor.execute("INSERT INTO ficheros (Nombre, Ruta, Id_user, Id_Depart, Id_virustotal, Malicioso_no, Hash, Estado) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
-                                               (filename, file_path, id_user, id_depart, file_id, malicioso_no, hash_value, "Revisado"))
+                                cursor.execute("INSERT INTO ficheros (Nombre, Ruta, Id_user, Id_Depart, Id_virustotal, Malicioso_no, Hash, Cant_anti, Estado) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                                               (filename, file_path, id_user, id_depart, file_id, malicioso_no, hash_value, cantidad_antivirus, "Revisado"))
 
                                 conn.commit()
                                 print("Información del archivo almacenada en la base de datos.")
 
                                 # Si el archivo es malicioso, eliminarlo
-                                if malicioso:
-                                    os.remove(file_path)
-                                    print(f"Archivo malicioso {filename} eliminado.")
+                                #if malicioso:
+                                #    os.remove(file_path)
+                                #    print(f"Archivo malicioso {filename} eliminado.")
 
                             else:
                                 print(f"Error en la segunda llamada a VirusTotal. Estado: {response_report.status_code}")
 
                         else:
                             print(f"Error en la primera llamada a VirusTotal. Estado: {response.status_code}")
+
+        # Función para calcular el hash de un archivo
+        def calcular_hash(file_path):
+            sha256 = hashlib.sha256()
+            with open(file_path, 'rb') as f:
+                while True:
+                    data = f.read(65536)  # Leemos bloques de 64KB
+                    if not data:
+                        break
+                    sha256.update(data)
+            return sha256.hexdigest()
 
         # Recorremos los usuarios en el directorio base y exploramos sus subdirectorios
         explorar_directorio(base_directory)

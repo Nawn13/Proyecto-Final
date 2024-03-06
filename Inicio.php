@@ -29,6 +29,12 @@ if ($resultDepartamento->num_rows > 0) {
     $nombreDepartamento = $rowDepartamento['Nombre'];
 }
 
+$queryiddepart = "SELECT Id_Depart FROM usuarios WHERE Nombre = '$usname'";
+$resultadoiddepart = mysqli_query($conn, $queryiddepart);
+
+$queryidusu = "SELECT Id_user FROM usuarios WHERE Nombre = '$usname'";
+$resultadoidusu = mysqli_query($conn, $queryidusu);
+
 $queryEmpleados = "SELECT Nombre FROM usuarios WHERE Id_Depart = (SELECT Id_Depart FROM usuarios WHERE Nombre = ?)";
 $stmtEmpleados = $conn->prepare($queryEmpleados);
 $stmtEmpleados->bind_param("s", $usname);
@@ -147,36 +153,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Ejecutar script codigo_virus_total.py
             $avg[1] = escapeshellarg($destinationDirectory); // Almacenar el directorio en la variable avg[1]
-            $pythonCommand2 = 'python .\codigo_virus_total.py ' .
-                $avg[1]; // Pasar la ruta del directorio como argumento
+            $row = mysqli_fetch_assoc($resultadoidusu);
+            $row2 = mysqli_fetch_assoc($resultadoiddepart);
+
+            $userId = $row['Id_user'];
+            $DepartId = $row2['Id_Depart'];
+            
+            $pythonCommand2 = 'python .\codigo_virus_total.py ' 
+                        . $avg[1] . ' ' 
+                        . $userId . ' '
+                        . $DepartId; // Pasar la ruta del directorio y la id_user como argumentos
             $output2 = [];
             $returnVar2 = 0;
             exec($pythonCommand2, $output2, $returnVar2);
 
             if ($returnVar2 === 0) {
-                echo " Script codigo_virus_total.py ejecutado correctamente. Verifica la salida para más detalles.";
+                echo "Script codigo_virus_total.py ejecutado correctamente. Verifica la salida para más detalles.";
             } else {
-                echo " Error al ejecutar el script codigo_virus_total.py. Consulta la salida para más detalles.";
+                echo "Error al ejecutar el script codigo_virus_total.py. Consulta la salida para más detalles.";
                 echo "<pre>";
                 print_r($output2);
                 echo "</pre>";
             }
 
-            // Insertar en la base de datos
-            $queryInsertFile = "INSERT INTO ficheros (Nombre, Ruta, Id_user, Id_Depart) VALUES (?, ?, (SELECT Id_user FROM usuarios WHERE Nombre = ?), (SELECT Id_Depart FROM departamentos WHERE Nombre = ?))";
-            $stmtInsertFile = $conn->prepare($queryInsertFile);
-            $stmtInsertFile->bind_param("ssss", $fileName, $filePath, $usname, $selectedDepartment);
-
-            if ($stmtInsertFile->execute()) {
-                echo " Datos almacenados en la base de datos correctamente.";
-            } else {
-                echo " Error al almacenar los datos en la base de datos.";
-                echo "<pre>";
-                print_r($output2);
-                echo "</pre>";
-            }
-
-            $stmtInsertFile->close();
         } else {
             echo "Error al mover el archivo al directorio de destino.";
             echo "Error: " . $_FILES['file-upload']['error'];
