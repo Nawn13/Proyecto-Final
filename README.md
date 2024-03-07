@@ -18,4 +18,5 @@ pip install requests
 pip install mysql-connector-python
 pip install pymongo
 
-
+En la fase 1 ha sido añadida la libreria de hash(puede haber la posibilidad de que ya este instalada)
+pip install hashlib
