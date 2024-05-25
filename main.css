@@ -1,0 +1,116 @@
+body {
+    color: white;
+    background-color: rgb(24, 24, 24);
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: rgb(24, 24, 24);
+    color: whitesmoke;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 1% 3%;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.head_div {
+    margin-right: 5%;
+    flex-grow: 1;
+}
+
+.head_list {
+    display: flex;
+    height: 30px;
+}
+
+li {
+    margin: 8px;
+    list-style: none;
+    border-right: 1px solid whitesmoke;
+    padding-right: 8px;
+}
+
+#Per1, #Per2, #Per3 {
+    width: 90%;
+    max-width: 1200px;
+    margin: 5% auto;
+    padding: 5% 3% 3%; /* Adjusted padding-bottom to 3% */
+    background-image: linear-gradient(to bottom, rgb(24, 24, 24), rgb(24, 24, 24)), url("fondo3.jpg");
+}
+
+#incognito {
+    width: 30%;
+    height: auto;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+#Contacto {
+    background-color: rgb(24, 24, 24);
+    width: 90%;
+    max-width: 1200px;
+    margin: 2% auto;
+    padding: 2%;
+}
+
+#RedesImagen {
+    width: 30%;
+    height: auto;
+    padding: 2%;
+    display: block;
+    margin: 0 auto;
+}
+
+#RedesImg {
+    width: 100%;
+    height: auto;
+}
+
+#Redes {
+    width: 60%;
+    margin-left: 5%;
+}
+
+#Agradecimientos {
+    width: 100%;
+    margin-top: 10%;
+}
+
+#Redireccion {
+    width: 100%;
+    margin-top: 20px;
+}
+
+#Boton {
+    background-color: rgb(24, 24, 24);
+    width: 100%;
+    height: 20px;
+    color: whitesmoke;
+}
+
+@media screen and (max-width: 768px) {
+    #Per1, #Per2, #Per3 {
+        width: 90%;
+        margin: 10% auto;
+    }
+
+    #RedesImagen {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    #Redes {
+        width: 100%;
+        margin-left: 0;
+    }
+}

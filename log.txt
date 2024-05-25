@@ -1,0 +1,6 @@
+python3: can't open file 'C:\\xampp\\htdocs\\pagina\\ruta\\del\\archivo\\ConMongo.py': [Errno 2] No such file or directory
+python3: can't open file 'C:\\xampp\\htdocs\\pagina\\ruta\\del\\archivo\\ConMongo.py': [Errno 2] No such file or directory
+python3: can't open file 'C:\\xampp\\htdocs\\pagina\\ruta\\del\\archivo\\ConMongo.py': [Errno 2] No such file or directory
+python3: can't open file 'C:\\xampp\\htdocs\\pagina\\ruta\\del\\archivo\\ConMongo.py': [Errno 2] No such file or directory
+Error: Se esperan 5 argumentos.
+Error: Se esperan 5 argumentos.
