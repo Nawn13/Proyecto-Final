@@ -1,0 +1,33 @@
+Introduction:
+
+Good afternoon everyone. Thank you for being here today. We are [name] and [name], and we are here on behalf of our group, DPS. Today, we're excited to present our project focusing on secure file transfer using the VirusTotal API.
+
+Project Overview:
+
+Our project revolves around ensuring secure file transfers through the integration of the VirusTotal API. We believe that in today's digital landscape, ensuring the safety of file transfers is paramount, especially considering the ever-evolving threats of malware and viruses.
+
+Mini Project:
+
+At the outset of our course, we embarked on a mini project aimed at developing a script capable of communicating with the VirusTotal API to verify the integrity of files. We designed a programmatic blueprint, which served as the foundation for our subsequent coding endeavors.
+
+What is an API?
+
+An API (Application Programming Interface) is a set of rules allowing software applications to communicate. It acts as a mediator, facilitating interaction between different systems.
+
+The script operates as follows:
+
+Upon file upload, it computes the hash of each file and stores it in the database along with the user's information.
+Subsequently, the script interfaces with the VirusTotal API to analyze the file, gathering essential information such as its maliciousness status, the number of antivirus detections, and file size.
+Depending on the analysis outcome, the script takes different actions. Malicious files are quarantined, while non-malicious ones are stored in the user's directory. This seamless integration between the API, database, and script facilitates efficient file management.
+
+Fase 0:
+
+Para mantenernos organizados en nuestro proyecto, establecimos tablas estructuradas dentro de una base de datos denominada "Empresa". Estas tablas sirven como repositorios de información pertinente, lo que nos permite rastrear y gestionar los datos de manera efectiva. Estamos utilizando PHP y Python para el desarrollo web, y hemos diseñado mockups para planificar la interfaz.
+
+Durante esta fase, nos enfocamos en mejorar la seguridad del sistema. Encriptamos contraseñas y creamos un sólido sistema de autenticación de usuarios. Además, nos dedicamos a la creación de formularios y funciones esenciales, como la carga de archivos y la visualización de resultados.
+
+Fase 1:
+
+En esta etapa, nos centramos en mejorar la funcionalidad del sistema y resolver problemas que surgieron. Completamos la implementación de formularios y nos ocupamos de aspectos relacionados con la gestión de archivos.
+
+Hemos tenido que enfrentar desafíos técnicos, como el manejo de subconsultas para restringir la carga de archivos según el departamento del usuario. También hemos trabajado en mejorar la escalabilidad de la base de datos, enfrentando problemas con MongoDB y optimizando el almacenamiento de acciones del usuario.
